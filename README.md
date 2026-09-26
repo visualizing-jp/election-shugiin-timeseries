@@ -42,4 +42,4 @@ npm run dev
 
 - `.github/workflows/pages.yml` で Pages にデプロイする。
 - カスタムドメイン `election-shugiin-timeseries.visualizing.jp` は `public/CNAME` に置いた。Pages 設定と visualizing.jp 側 DNS（既存シリーズと同じ運用）で登録する。
-- Google Analytics の測定ID（`src/app/analytics.ts`）は空のまま。空のあいだは計測しない。
+- Google Analytics の測定ID（`src/app/analytics.ts`）はシリーズ共通（表紙 japan-election と同じ）。
