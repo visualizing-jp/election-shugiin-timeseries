@@ -1,6 +1,6 @@
 // シリーズ共通のブランド要素。全サイトで同じ内容を持つので、変えるときは Prj_JapanElection 配下の兄弟リポすべてに揃える。
 
-export const HUB_URL = "https://election-shugiin.visualizing.jp/";
+export const HUB_URL = "https://japan-election.visualizing.jp/";
 export const HUB_TITLE = "日本人は、どう政治を選んできたか";
 export const VISUALIZING_URL = "https://visualizing.jp/";
 
