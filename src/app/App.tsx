@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { EraView } from "./views/EraView.tsx";
 import { AreaView } from "./views/AreaView.tsx";
 import { useUrlState } from "./hooks/useUrlState.ts";
+import { SeriesBar, SeriesFooter } from "./components/Brand.tsx";
 
 const VIEWS = [
   { id: "era", label: "時代", hint: "1996–2026" },
@@ -17,6 +18,7 @@ export function App() {
   return (
     <div className="min-h-dvh">
       <header className="border-b border-rule bg-paper/85 backdrop-blur-sm">
+        <SeriesBar />
         <div className="mx-auto flex w-full max-w-[1240px] flex-wrap items-end justify-between gap-4 px-6 pt-5">
           <div className="pb-2">
             <h1 className="text-[15px] font-semibold tracking-tight">衆議院選挙で、どの党がどれだけ票を得てきたか</h1>
@@ -50,9 +52,7 @@ export function App() {
       <footer className="mx-auto w-full max-w-[1240px] px-6 pt-2 pb-10 text-[11px] leading-relaxed text-faint">
         出典: 総務省「衆議院議員総選挙・最高裁判所裁判官国民審査結果調」。第44回以降は各回の結果ページの表、第41〜43回は第49回確定結果調の「党派別得票数の推移」による。
         第44〜49回は確定結果の全国値と一致を確認。第50・51回は確定結果が未公表のため速報。按分票を含むため得票数に小数がある。
-        <a href="https://visualizing.jp/" className="mt-2 block w-fit transition-colors duration-150 hover:text-muted">
-          visualizing.jp
-        </a>
+        <SeriesFooter />
       </footer>
     </div>
   );
