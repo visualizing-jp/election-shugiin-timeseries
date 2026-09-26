@@ -37,12 +37,22 @@ function short(label: string): string {
   return label === "北海道" ? label : label.replace(/[都府県]$/, "");
 }
 
-/** 塗りが濃いときは文字を白にする。相対輝度の簡易式。 */
-function isDark(rgb: string): boolean {
-  const m = rgb.match(/\d+/g);
-  if (m === null) return false;
-  const [r, g, b] = m.map(Number) as [number, number, number];
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b < 140;
+/** 文字の墨色。styles.css の --color-ink と同じ。 */
+const INK = "#16140f";
+
+/** WCAG 2 の相対輝度。 */
+function luminance(hex: string): number {
+  const [r, g, b] = (hex.match(/[\da-f]{2}/gi) ?? []).map((h) => {
+    const c = parseInt(h, 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  }) as [number, number, number];
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+/** 白字と墨字のうち、塗りとのコントラスト比が高いほうを選ぶ。白字なら true。 */
+function isDark(hex: string): boolean {
+  const bg = luminance(hex);
+  return (1 + 0.05) / (bg + 0.05) > (bg + 0.05) / (luminance(INK) + 0.05);
 }
 
 export function TileMap({

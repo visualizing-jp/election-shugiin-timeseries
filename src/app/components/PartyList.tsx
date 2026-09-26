@@ -29,13 +29,23 @@ export function PartyList({
   allowNone?: boolean;
 }) {
   const max = Math.max(...rows.map((r) => r.share), 0.0001);
+  const boxRef = useRef<HTMLDivElement>(null);
   const selectedRef = useRef<HTMLButtonElement>(null);
 
+  // 選んだ行が見えるよう、一覧の枠の中だけをスクロールする。scrollIntoView はページごと動かすので、
+  // 一覧が本文の下に回る狭い画面では、開いた途端にページの末尾へ飛んでしまう。
   useEffect(() => {
-    selectedRef.current?.scrollIntoView({ block: "nearest" });
+    const box = boxRef.current;
+    const el = selectedRef.current;
+    if (box === null || el === null || box.scrollHeight <= box.clientHeight) return;
+    const b = box.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    if (r.top < b.top) box.scrollTop += r.top - b.top;
+    else if (r.bottom > b.bottom) box.scrollTop += r.bottom - b.bottom;
   }, [selected]);
 
   return (
+    <div ref={boxRef} className="min-h-0 flex-1 overflow-y-auto">
     <ul className="flex flex-col">
       {allowNone && (
         <li className="mb-1 border-b border-rule pb-1">
@@ -104,5 +114,6 @@ export function PartyList({
         );
       })}
     </ul>
+    </div>
   );
 }

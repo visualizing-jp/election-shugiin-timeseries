@@ -91,15 +91,13 @@ export function EraView() {
           </span>
           <span className="font-normal">得票率</span>
         </h2>
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          <PartyList
-            rows={rows}
-            selected={selected}
-            onSelect={(p) => setParty(p === selected ? "" : p)}
-            palette={palette}
-            allowNone
-          />
-        </div>
+        <PartyList
+          rows={rows}
+          selected={selected}
+          onSelect={(p) => setParty(p === selected ? "" : p)}
+          palette={palette}
+          allowNone
+        />
         <p className="mt-2 border-t border-rule px-2 pt-2 text-[10.5px] leading-relaxed text-faint">
           党を選ぶとグラフでその党だけを濃くする。「すべての党」か、同じ党をもう一度押すと解除。棒を押すとその回の内訳をここに出す。
         </p>

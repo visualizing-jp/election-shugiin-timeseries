@@ -123,9 +123,7 @@ export function AreaView({ kind }: { kind: AreaKind }) {
           </span>
           <span className="font-normal">全国の得票率</span>
         </h2>
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          <PartyList rows={rows} selected={party} onSelect={setParty} palette={palette} />
-        </div>
+        <PartyList rows={rows} selected={party} onSelect={setParty} palette={palette} />
       </aside>
 
       <main className="min-w-0 flex-1">
